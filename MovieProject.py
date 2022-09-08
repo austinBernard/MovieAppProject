@@ -5,12 +5,14 @@
 # f.close()
     
 # Menu promt for user to select there option
-MENU_PROMPT = "\n Please select an option \n 'a' to add a movie \n 'm' to see your movies \n 'f' to find a movie by title \n 'q' to quit: "
+MENU_PROMPT = " \n 'a' to add a movie \n 'm' to see your movies \n 'f' to find a movie by title \n 'y' to see all movies in given year \n 'q' to quit \n Please select an option: "
 
 # Store new movies from user input
 movies = []
 
-# Functions for program 
+# Read from movies.txt the current stored movies
+with open('movies.txt') as f:
+    lines = f.readlines()
 
 # Function to add movies to movies list
 def add_movie():
@@ -37,7 +39,7 @@ def print_movie(movie):
 
 # Function to find movies in the stored movies list        
 def find_movie():
-    search = input("\nEnter a movie to search for: ")
+    search = input("Enter a movie to search for: ")
     
     for movie in movies:
         if movie['title'] == search:
@@ -45,9 +47,20 @@ def find_movie():
         else:
             print("\nError. Movie not found... Please try again.")
             
+
+# Function to select all movies within a given year
+def movie_years():
+    search_movie_years = input("Input a year to see all movies from given year: ")
+    
+    for movie in movies:
+        if movie['year'] == search_movie_years:
+            print_movie(movie)
+        else:
+            print("\nNo movies found for given year.")
+    
  
  # User options
-user_options = {'a': add_movie, 'm': show_movie, 'f': find_movie}
+user_options = {'a': add_movie, 'm': show_movie, 'f': find_movie, 'y': movie_years}
 
 
 # Function defining the menu selections
@@ -66,3 +79,8 @@ def menu():
 
 # main
 menu()
+#Fix this next update
+with open('movies.txt', 'wb') as f:
+    for wd in movies:
+        f.write(wd)
+
