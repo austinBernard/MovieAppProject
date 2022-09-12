@@ -1,18 +1,9 @@
-# store/write movies in .txt file
-
-# f = open("movies.txt", "w")
-# f.write(str(dict))
-# f.close()
-    
 # Menu promt for user to select there option
-MENU_PROMPT = " \n 'a' to add a movie \n 'm' to see your movies \n 'f' to find a movie by title \n 'y' to see all movies in given year \n 'q' to quit \n Please select an option: "
+MENU_PROMPT = " \n 'a' to add a movie \n 'm' to see your movies \n 'f' to find a movie by title \n 'y' to see all movies in given year \n 'l' load past saved movies \n 's' to save current movies \n 'q' to quit \n Please select an option: "
 
-# Store new movies from user input
+
 movies = []
 
-# Read from movies.txt the current stored movies
-with open('movies.txt') as f:
-    lines = f.readlines()
 
 # Function to add movies to movies list
 def add_movie():
@@ -25,17 +16,34 @@ def add_movie():
         'director': director, 
         'year': year
     })
+    
+    
+# Function to save movies into a .txt file
+def save_movies():
+    with open('movies.txt', 'a') as f:
+        f.write(str(movies))
+        print('\nSucessfully saved to movies.txt!')
 
+
+# Function to load movies from a stored .txt file
+def load_movie():
+    with open('movies.txt', 'r') as f:
+        pass
+        
+        
+    
 # Function to show movies
 def show_movie():
     for movie in movies:
         print_movie(movie)
+        
 
 # Function that prints movie details if user selects 'm'
 def print_movie(movie):
     print(f"\nTitle: {movie['title']}")
     print(f"Director: {movie['director']}")
     print(f"Year Released: {movie['year']}")
+    
 
 # Function to find movies in the stored movies list        
 def find_movie():
@@ -60,7 +68,7 @@ def movie_years():
     
  
  # User options
-user_options = {'a': add_movie, 'm': show_movie, 'f': find_movie, 'y': movie_years}
+user_options = {'a': add_movie, 'm': show_movie, 'f': find_movie, 'y': movie_years, 's': save_movies, 'l': load_movie}
 
 
 # Function defining the menu selections
@@ -77,10 +85,7 @@ def menu():
         selection = input(MENU_PROMPT)
 
 
-# main
+# Main
 menu()
-#Fix this next update
-with open('movies.txt', 'wb') as f:
-    for wd in movies:
-        f.write(wd)
+
 
