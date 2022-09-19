@@ -23,6 +23,7 @@ def save_movies():
     with open('movies.txt', 'a') as f:
         f.write(str(movies))
         print('\nSucessfully saved to movies.txt!')
+    f.close()
 
 
 # Function to load movies from a stored .txt file
